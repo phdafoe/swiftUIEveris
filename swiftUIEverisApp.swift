@@ -11,7 +11,7 @@ import SwiftUI
 struct swiftUIEverisApp: App {
     var body: some Scene {
         WindowGroup {
-            BindingTest().environmentObject(NumeroRandom())
+            NavigationTest()
         }
     }
 }

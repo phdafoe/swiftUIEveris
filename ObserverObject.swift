@@ -55,7 +55,6 @@ struct VideosFitness: Codable, Identifiable {
 class ObserverObjectPresenter: ObservableObject {
     
     @Published var fitness : VideosModel?
-    //@Published var array: [VideosFitness]
     
     func sendRequest() {
         let sessionConfig = URLSessionConfiguration.default
