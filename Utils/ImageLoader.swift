@@ -41,3 +41,17 @@ class ImageLoader : ObservableObject {
         }
     }
 }
+
+struct GenericCustomButtonStyle: ButtonStyle {
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .accentColor(.black)
+            .padding(20)
+            .background(Color.yellow)
+            .cornerRadius(10)
+            .shadow(radius:10)
+            .animation(.spring())
+    }
+    
+}

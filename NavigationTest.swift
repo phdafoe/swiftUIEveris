@@ -9,40 +9,58 @@ import SwiftUI
 
 struct NavigationTest: View {
     
+    @State private var isLinkActive = false
+    @State private var isModal = false
+    @State private var isModalFullScreen = false
+    
     var body: some View {
         NavigationView{
             VStack(spacing: 15){
+                
                 NavigationLink(
                     destination: SegundaVistaTest(name: "AQUI ANDRES"),
+                    isActive: self.$isLinkActive,
                     label: {
-                        HStack{
-                            Image(systemName: "plus")
-                                .padding(5)
-                                .background(Color.red)
-                                .cornerRadius(5.0)
-                            Text("Navegar a la Segunda vista")
-                                .font(.title3)
-                        }
-                        .padding()
-                        .background(Color.black)
-                        .cornerRadius(10)
-                        .shadow(radius: 10)
-                    }).foregroundColor(.white)
+                        Button(action: {
+                            self.isLinkActive = true
+                        }, label: {
+                            HStack{
+                                Image(systemName: "play.fill")
+                                    .font(.title2)
+                                Text("Navegar a la Segunda vista")
+                                    .font(.title3)
+                            }
+                        }).buttonStyle(GenericCustomButtonStyle())
+                })
                 
                 Button(action: {
-                    //Action
+                    self.isModal = true
                 }, label: {
                     HStack{
                         Image(systemName: "play.fill")
                             .font(.title)
-                            .foregroundColor(.white)
                         Text("Muestra Modal")
                             .font(.title)
-                            .foregroundColor(.white)
-                    }.padding()
-                    .background(Color.green)
-                    .cornerRadius(10)
-                    .shadow(radius: 10)
+                    }
+                })
+                .buttonStyle(GenericCustomButtonStyle())
+                .sheet(isPresented: self.$isModal, content: {
+                    TerceraVistaModalTest()
+                })
+                
+                Button(action: {
+                    self.isModalFullScreen = true
+                }, label: {
+                    HStack{
+                        Image(systemName: "play.fill")
+                            .font(.title)
+                        Text("Muestra Modal Full Screen")
+                            .font(.title)
+                    }
+                })
+                .buttonStyle(GenericCustomButtonStyle())
+                .fullScreenCover(isPresented: self.$isModalFullScreen, content: {
+                    TerceraVistaModalTest()
                 })
             }
             .navigationBarTitle("everis", displayMode: .automatic)
@@ -58,7 +76,7 @@ struct NavigationTest: View {
                                             }
                                             .padding()
                                         }).foregroundColor(.white)
-                                    
+                                
             )
         }
         
@@ -78,5 +96,18 @@ struct SegundaVistaTest: View {
     
     var body: some View {
         Text("Segunda vista = \(name)")
+    }
+}
+
+struct TerceraVistaModalTest: View {
+    
+    @SwiftUI.Environment(\.presentationMode) var presentationMode
+    
+    var body: some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }, label: {
+            Text("Butto para ocultar la Modal")
+        }).buttonStyle(GenericCustomButtonStyle())
     }
 }
