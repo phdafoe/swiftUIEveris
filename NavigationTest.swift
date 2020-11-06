@@ -63,7 +63,7 @@ struct NavigationTest: View {
                     TerceraVistaModalTest()
                 })
             }
-            .navigationBarTitle("everis", displayMode: .automatic)
+            .navigationBarTitle("everis", displayMode: .inline)
             .navigationBarItems(trailing:
                                     NavigationLink(
                                         destination: SegundaVistaTest(name: "AQUI ALAN"),
