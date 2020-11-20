@@ -53,5 +53,51 @@ struct GenericCustomButtonStyle: ButtonStyle {
             .shadow(radius:10)
             .animation(.spring())
     }
+}
+
+struct PrimaryLabel: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .background(Color.clear)
+            .foregroundColor(.black)
+            .font(.title)
+    }
+}
+
+struct SecondLabel: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .background(Color.clear)
+            .foregroundColor(.black)
+            .font(.title2)
+    }
+}
+
+struct ThirdLabel: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .background(Color.clear)
+            .foregroundColor(.black)
+            .font(.title3)
+    }
+}
+
+class Utils {
+    
+    func myAlertView(myTitle: String, myMessage: String) -> Alert {
+        let alert = Alert(title: Text(myTitle),
+                          message: Text(myMessage),
+                          primaryButton: .default(Text("OK")),
+                          secondaryButton: .cancel())
+        return alert
+    }
+
+    func myActionSheet(myTitle: String, myMessage: String, myArray: [ActionSheet.Button]) -> ActionSheet {
+        let actionSheet = ActionSheet(title: Text(myTitle),
+                                      message: Text(myMessage),
+                                      buttons: myArray)
+        return actionSheet
+    }
     
 }
+
